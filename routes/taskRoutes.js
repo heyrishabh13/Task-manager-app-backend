@@ -31,11 +31,13 @@ router.delete("/:id", protect, async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 
+    console.log(`task.user = ${task.user} & req.user = ${req.user}`);
+
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
 
-    if (task.user.toString() !== req.user) {
+    if (task.user.toString() !== req.user._id.toString()) {
       return res.status(401).json({ message: "Unauthorized user" });
     }
 
