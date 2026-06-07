@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
+require(dotenv).config();
 
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(
-    "mongodb+srv://heyrishabh13:VGbWKfvtsvkPyL5Y@cluster0.rjwuyra.mongodb.net/",
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
